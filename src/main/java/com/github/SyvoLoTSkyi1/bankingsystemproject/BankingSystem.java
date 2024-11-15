@@ -1,14 +1,16 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
+import java.util.Arrays;
+
 public class BankingSystem {
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Banking System");
 
-        Account account = new Account("12345678", 0);
+        Account account = new Account("12345678", 1000);
 
-        account.getAccountNumber();
-        account.getBalance();
+        System.out.println("Account number: " + account.getAccountNumber());
+        System.out.println("Account balance: " + account.getBalance());
 
     }
 }

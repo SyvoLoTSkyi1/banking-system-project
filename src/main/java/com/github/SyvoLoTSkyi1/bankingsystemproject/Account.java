@@ -1,8 +1,8 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
 public class Account {
-    String accountNumber;
-    double balance;
+    private String accountNumber;
+    private double balance;
 
     Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
@@ -10,12 +10,12 @@ public class Account {
 
     }
 
-    public void getAccountNumber() {
-        System.out.println("Account number: " + this.accountNumber);
+    public String getAccountNumber() {
+        return this.accountNumber;
     }
 
-    public void getBalance() {
-        System.out.println("Account balance: " + this.balance);
+    public double getBalance() {
+        return this.balance;
     }
 
 }
