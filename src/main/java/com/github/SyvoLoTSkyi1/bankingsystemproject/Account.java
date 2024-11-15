@@ -10,6 +10,12 @@ public class Account {
 
     }
 
+    public void getAccountNumber() {
+        System.out.println("Account number: " + this.accountNumber);
+    }
+
+    public void getBalance() {
+        System.out.println("Account balance: " + this.balance);
+    }
 
 }
-
