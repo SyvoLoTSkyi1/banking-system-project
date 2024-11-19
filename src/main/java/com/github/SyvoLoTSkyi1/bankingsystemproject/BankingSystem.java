@@ -13,12 +13,22 @@ public class BankingSystem {
         System.out.println("Account number: " + account.getAccountNumber());
         System.out.println("Account balance: " + account.getBalance());
 
-        account.deposit(1000);
-        System.out.println("Deposit of 1000 amount to account was made successfully ");
+        int depositAmount = 1000;
+        boolean depositResult = account.deposit(depositAmount);
+        if (depositResult) {
+            System.out.println("Deposit of " + depositAmount + " amount to account was made successfully");
+        } else {
+            System.out.println("Deposit failed. Deposit amount must be bigger than zero");
+        }
         System.out.println("Account balance: " + account.getBalance());
 
-        account.withdrawal(300);
-        System.out.println("Withdrawal of 300 amount from account was made successfully");
+        int withdrawalAmount = 300;
+        boolean withdrawalResult = account.withdrawal(withdrawalAmount);
+        if (withdrawalResult) {
+            System.out.println("Withdrawal of " + withdrawalAmount + " amount to account was made successfully");
+        } else {
+            System.out.println("Withdrawal failed. Withdrawal amount must be bigger than zero and equals or less than balance");
+        }
         System.out.println("Account balance: " + account.getBalance());
 
 

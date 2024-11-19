@@ -18,13 +18,24 @@ public class Account {
         return this.balance;
     }
 
-    public void deposit(double amount) {
-        this.balance += amount;
+    public boolean deposit(double amount) {
+        if (amount > 0) {
+            this.balance += amount;
+            return true;
+        } else {
+            return false;
+        }
+
 
     }
 
-    public void withdrawal(double amount) {
-        this.balance -= amount;
+    public boolean withdrawal(double amount) {
+        if (amount > 0 && amount <= this.balance) {
+            this.balance -= amount;
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
