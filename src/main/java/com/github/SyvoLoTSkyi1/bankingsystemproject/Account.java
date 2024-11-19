@@ -4,9 +4,9 @@ public class Account {
     private String accountNumber;
     private double balance;
 
-    Account(String accountNumber, double balance) {
+    Account(String accountNumber) {
         this.accountNumber = accountNumber;
-        this.balance = balance;
+        this.balance = 0.0;
 
     }
 
@@ -16,6 +16,16 @@ public class Account {
 
     public double getBalance() {
         return this.balance;
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+
+    }
+
+    public void withdrawal(double amount) {
+        this.balance -= amount;
+
     }
 
 }
