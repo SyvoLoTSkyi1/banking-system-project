@@ -13,7 +13,7 @@ public class BankingSystem {
         System.out.println("Account number: " + account.getAccountNumber());
         System.out.println("Account balance: " + account.getBalance());
 
-        int depositAmount = 1000;
+        double depositAmount = 1000;
         boolean depositResult = account.deposit(depositAmount);
         if (depositResult) {
             System.out.println("Deposit of " + depositAmount + " amount to account was made successfully");
@@ -22,10 +22,10 @@ public class BankingSystem {
         }
         System.out.println("Account balance: " + account.getBalance());
 
-        int withdrawalAmount = 300;
+        double withdrawalAmount = 300;
         boolean withdrawalResult = account.withdrawal(withdrawalAmount);
         if (withdrawalResult) {
-            System.out.println("Withdrawal of " + withdrawalAmount + " amount to account was made successfully");
+            System.out.println("Withdrawal of " + withdrawalAmount + " amount from account was made successfully");
         } else {
             System.out.println("Withdrawal failed. Withdrawal amount must be bigger than zero and equals or less than balance");
         }

@@ -21,6 +21,7 @@ public class Account {
     public boolean deposit(double amount) {
         if (amount > 0) {
             this.balance += amount;
+            logTransaction("Deposit", amount);
             return true;
         } else {
             return false;
@@ -32,11 +33,16 @@ public class Account {
     public boolean withdrawal(double amount) {
         if (amount > 0 && amount <= this.balance) {
             this.balance -= amount;
+            logTransaction("Withdrawal", amount);
             return true;
         } else {
             return false;
         }
 
+    }
+
+    private void logTransaction(String operation, double amount) {
+        System.out.println("Transaction: " + operation + "; Amount: " + amount);
     }
 
 }
