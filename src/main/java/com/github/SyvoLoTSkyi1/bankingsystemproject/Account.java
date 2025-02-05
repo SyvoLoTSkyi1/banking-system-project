@@ -1,12 +1,20 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Account {
     private String accountNumber;
     private double balance;
+    private final LocalDateTime creationDate;
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
     Account(String accountNumber) {
         this.accountNumber = accountNumber;
         this.balance = 0.0;
+        this.creationDate = LocalDateTime.now();
 
     }
 
@@ -16,6 +24,10 @@ public class Account {
 
     public double getBalance() {
         return this.balance;
+    }
+
+    public String getCreationDate() {
+        return this.creationDate.format(formatter);
     }
 
     public boolean deposit(double amount) {
@@ -42,7 +54,8 @@ public class Account {
     }
 
     private void logTransaction(String operation, double amount) {
-        System.out.println("Transaction: " + operation + "; Amount: " + amount);
+        LocalDateTime date = LocalDateTime.now();
+        System.out.println("[" + date.format(formatter) + "] " + "Transaction: " + operation + "; Amount: " + amount);
     }
 
 }

@@ -12,6 +12,7 @@ public class BankingSystem {
 
         System.out.println("Account number: " + account.getAccountNumber());
         System.out.println("Account balance: " + account.getBalance());
+        System.out.println("Account creation date: " + account.getCreationDate());
 
         double depositAmount = 1000;
         boolean depositResult = account.deposit(depositAmount);
