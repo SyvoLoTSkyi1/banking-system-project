@@ -11,10 +11,13 @@ public class BankingSystem {
 
         // New account creation
         System.out.println("\nCreate your account to start!");
+
         System.out.print("\nEnter your account number: ");
         String accountNumber = scanner.next();
+        System.out.print("\nEnter your password: ");
+        String accountPassword = scanner.next();
 
-        Account account = new Account(accountNumber, "qwerty");
+        Account account = new Account(accountNumber, accountPassword);
         System.out.println("\nThe new account with account number " + account.getAccountNumber() + " was created!");
 
         // Basic loop for users
@@ -26,9 +29,17 @@ public class BankingSystem {
             System.out.println("4. Withdraw money");
             System.out.println("5. Exit\n");
 
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number from 1 to 5.");
+                scanner.nextLine(); // Clean wrong input
+                continue;
+            }
+
             int option = scanner.nextInt();
+            scanner.nextLine();
 
             switch (option) {
+
                 case 1:
                     System.out.println("\nAccount information:");
                     System.out.println("Account number: " + account.getAccountNumber());
@@ -42,22 +53,39 @@ public class BankingSystem {
 
                 case 3:
                     System.out.print("\nEnter deposit amount: ");
-                    double depositAmount = scanner.nextDouble();
 
-                    if (account.deposit(depositAmount)) {
-                        System.out.println("Deposit of " + depositAmount + " amount to account was made successfully");
+                    if (scanner.hasNextDouble()) {
+                        double depositAmount = scanner.nextDouble();
+                        scanner.nextLine(); // Clean after nextDouble()
+
+                        if (account.deposit(depositAmount)) {
+                            System.out.println("Deposit of " + depositAmount + " amount to account was made successfully");
+                        } else {
+                            System.out.println("Deposit failed. Deposit amount must be bigger than zero");
+                        }
+
                     } else {
-                        System.out.println("Deposit failed. Deposit amount must be bigger than zero");
+                        System.out.println("Error. Enter a number");
+                        scanner.nextLine(); // Clean wrong input
                     }
                     break;
 
                 case 4:
                     System.out.print("\nEnter withdrawal amount: ");
-                    double withdrawalAmount = scanner.nextDouble();
-                    if (account.withdrawal(withdrawalAmount)) {
-                        System.out.println("Withdrawal of " + withdrawalAmount + " amount from account was made successfully");
+
+                    if (scanner.hasNextDouble()) {
+                        double withdrawalAmount = scanner.nextDouble();
+                        scanner.nextLine(); // Clean after nextDouble()
+
+                        if (account.withdrawal(withdrawalAmount)) {
+                            System.out.println("Withdrawal of " + withdrawalAmount + " amount from account was made successfully");
+                        } else {
+                            System.out.println("Withdrawal failed. Withdrawal amount must be bigger than zero and equals or less than balance");
+                        }
+
                     } else {
-                        System.out.println("Withdrawal failed. Withdrawal amount must be bigger than zero and equals or less than balance");
+                        System.out.println("Error. Enter a number");
+                        scanner.nextLine(); // Clean wrong input
                     }
                     break;
 
