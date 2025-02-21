@@ -2,6 +2,8 @@ package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Account {
@@ -9,6 +11,7 @@ public class Account {
     private final String password;
     private double balance;
     private final LocalDateTime creationDate;
+    private List<String> transactionList;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -18,6 +21,7 @@ public class Account {
         this.password = password;
         this.balance = 0.0;
         this.creationDate = LocalDateTime.now();
+        this.transactionList = new ArrayList<>();
 
     }
 
@@ -31,6 +35,10 @@ public class Account {
 
     public String getCreationDate() {
         return this.creationDate.format(formatter);
+    }
+
+    public List<String> getTransactionList() {
+        return new ArrayList<>(transactionList);
     }
 
     public boolean checkPassword(String password) {
@@ -60,8 +68,9 @@ public class Account {
     }
 
     private void logTransaction(String operation, double amount) {
-        LocalDateTime date = LocalDateTime.now();
-        System.out.println("[" + date.format(formatter) + "] " + "Transaction: " + operation + "; Amount: " + amount);
+        String transaction = "[" + LocalDateTime.now().format(formatter) + "] | " + "Transaction: " + operation + " - ; Amount: " + amount;
+        this.transactionList.add(transaction);
+        System.out.println(transaction);
     }
 
 }
