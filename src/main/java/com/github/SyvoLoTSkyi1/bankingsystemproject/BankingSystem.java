@@ -27,7 +27,8 @@ public class BankingSystem {
             System.out.println("2. Check balance");
             System.out.println("3. Deposit money");
             System.out.println("4. Withdraw money");
-            System.out.println("5. Exit\n");
+            System.out.println("5. Transaction history");
+            System.out.println("6. Exit\n");
 
             if (!scanner.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number from 1 to 5.");
@@ -90,6 +91,14 @@ public class BankingSystem {
                     break;
 
                 case 5:
+                    System.out.println("\nTransaction history: ");
+
+                    for (String transaction : account.getTransactionList()) {
+                        System.out.println(transaction);
+                    }
+                    break;
+
+                case 6:
                     System.out.println("\nThank you for using the Banking System! Goodbye.");
                     scanner.close();
                     return;
