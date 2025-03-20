@@ -1,12 +1,13 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BankingSystem {
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        AccountService accountService = new AccountService();
+
         System.out.println("Welcome to the Banking System!");
 
         // New account creation
@@ -41,92 +42,53 @@ public class BankingSystem {
 
             switch (option) {
 
-                case 1:
-                    getAccountInfo(account);
-                    break;
+                case 1 -> accountService.getAccountInfo(account);
 
-                case 2:
-                    getAccountBalance(account);
-                    break;
+                case 2 -> accountService.getAccountBalance(account);
 
-                case 3:
-                    accountDeposit(account);
-                    break;
+                case 3 -> {
+                    System.out.print("\nEnter deposit amount: ");
 
-                case 4:
-                    accountWithdrawal(account);
-                    break;
+                    if (scanner.hasNextDouble()) {
+                        double depositAmount = scanner.nextDouble();
+                        scanner.nextLine(); // Clean after nextDouble()
 
-                case 5:
-                    accountTransactionHistory(account);
-                    break;
+                        accountService.depositToAccount(account, depositAmount);
 
-                case 6:
+                    } else {
+                        System.out.println("Error. Enter a number");
+                        scanner.nextLine(); // Clean wrong input
+                    }
+                }
+
+                case 4 -> {
+                    System.out.print("\nEnter withdrawal amount: ");
+
+                    if (scanner.hasNextDouble()) {
+                        double withdrawalAmount = scanner.nextDouble();
+                        scanner.nextLine(); // Clean after nextDouble()
+
+                        accountService.withdrawalFromAccount(account, withdrawalAmount);
+
+                    } else {
+                        System.out.println("Error. Enter a number");
+                        scanner.nextLine(); // Clean wrong input
+                    }
+                }
+
+                case 5 -> accountService.accountTransactionHistory(account);
+
+                case 6 -> {
                     System.out.println("\nThank you for using the Banking System! Goodbye.");
                     scanner.close();
                     return;
+                }
 
-                default:
-                    System.out.println("\nInvalid option. Please enter a number from 1 to 5.");
+                default -> System.out.println("\nInvalid option. Please enter a number from 1 to 5.");
+
             }
         }
 
     }
 
-    private static void getAccountInfo(Account account) {
-        System.out.println("\nAccount information:");
-        System.out.println("Account number: " + account.getAccountNumber());
-        System.out.println("Account balance: " + account.getBalance());
-        System.out.println("Account creation date: " + account.getCreationDate());
-    }
-
-    private static void getAccountBalance(Account account) {
-        System.out.println("\nAccount balance: " + account.getBalance());
-    }
-
-    private static void accountDeposit(Account account) {
-        System.out.print("\nEnter deposit amount: ");
-
-        if (scanner.hasNextDouble()) {
-            double depositAmount = scanner.nextDouble();
-            scanner.nextLine(); // Clean after nextDouble()
-
-            if (account.deposit(depositAmount)) {
-                System.out.println("Deposit of " + depositAmount + " amount to account was made successfully");
-            } else {
-                System.out.println("Deposit failed. Deposit amount must be bigger than zero");
-            }
-
-        } else {
-            System.out.println("Error. Enter a number");
-            scanner.nextLine(); // Clean wrong input
-        }
-    }
-
-    private static void accountWithdrawal(Account account) {
-        System.out.print("\nEnter withdrawal amount: ");
-
-        if (scanner.hasNextDouble()) {
-            double withdrawalAmount = scanner.nextDouble();
-            scanner.nextLine(); // Clean after nextDouble()
-
-            if (account.withdrawal(withdrawalAmount)) {
-                System.out.println("Withdrawal of " + withdrawalAmount + " amount from account was made successfully");
-            } else {
-                System.out.println("Withdrawal failed. Withdrawal amount must be bigger than zero and equals or less than balance");
-            }
-
-        } else {
-            System.out.println("Error. Enter a number");
-            scanner.nextLine(); // Clean wrong input
-        }
-    }
-
-    private static void accountTransactionHistory(Account account) {
-        System.out.println("\nTransaction history: ");
-
-        for (String transaction : account.getTransactionList()) {
-            System.out.println(transaction);
-        }
-    }
 }
