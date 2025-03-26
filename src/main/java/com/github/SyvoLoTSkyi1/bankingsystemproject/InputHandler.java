@@ -15,7 +15,6 @@ public class InputHandler {
             System.out.println("Invalid input. Please enter a valid number.");
             scanner.nextLine(); // Clean wrong input
         }
-
         int value = scanner.nextInt();
         scanner.nextLine();
         return value;
@@ -27,7 +26,6 @@ public class InputHandler {
             System.out.println("Invalid input. Please enter a valid number.");
             scanner.nextLine(); // Clean wrong input
         }
-
         double value = scanner.nextDouble();
         scanner.nextLine();
         return value;
