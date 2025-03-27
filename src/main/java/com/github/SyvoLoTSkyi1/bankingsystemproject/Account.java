@@ -11,7 +11,7 @@ public class Account {
     private final String password;
     private double balance;
     private final LocalDateTime creationDate;
-    private List<String> transactionList;
+    private List<Transaction> transactionList;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -22,7 +22,6 @@ public class Account {
         this.balance = 0.0;
         this.creationDate = LocalDateTime.now();
         this.transactionList = new ArrayList<>();
-
     }
 
     public String getAccountNumber() {
@@ -37,7 +36,7 @@ public class Account {
         return this.creationDate.format(formatter);
     }
 
-    public List<String> getTransactionList() {
+    public List<Transaction> getTransactionList() {
         return new ArrayList<>(transactionList);
     }
 
@@ -68,7 +67,7 @@ public class Account {
     }
 
     private void logTransaction(String operation, double amount) {
-        String transaction = "[" + LocalDateTime.now().format(formatter) + "] | " + "Transaction: " + operation + " - ; Amount: " + amount;
+        Transaction transaction = new Transaction(operation, amount);
         this.transactionList.add(transaction);
         System.out.println(transaction);
     }

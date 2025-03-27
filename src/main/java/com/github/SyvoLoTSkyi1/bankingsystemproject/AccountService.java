@@ -1,5 +1,7 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
+import java.util.List;
+
 public class AccountService {
 
     public void getAccountInfo(Account account) {
@@ -32,9 +34,16 @@ public class AccountService {
     public void accountTransactionHistory(Account account) {
         System.out.println("\nTransaction history: ");
 
-        for (String transaction : account.getTransactionList()) {
-            System.out.println(transaction);
+        List<Transaction> transactions = account.getTransactionList();
+        if (!transactions.isEmpty()) {
+            for (Transaction transaction : transactions) {
+                System.out.println(transaction);
+            }
+        } else {
+            System.out.println("No transactions yet");
         }
+
+
     }
 
 }
