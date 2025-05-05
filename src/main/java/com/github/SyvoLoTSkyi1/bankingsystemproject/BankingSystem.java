@@ -1,18 +1,18 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BankingSystem {
 
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
         AccountService accountService = new AccountService();
-        List<Account> accounts = new ArrayList<>();
-
-
+        Map<String, Account> accounts = new HashMap<>();
+        
         System.out.println("Welcome to the Banking System!");
-
 
         while (true) {
             System.out.println("\nMain Menu:");
@@ -24,36 +24,9 @@ public class BankingSystem {
 
             switch (option) {
 
-                case 1 -> {
-                    String accountNumber = inputHandler.getStringInput("\nEnter your account number: ");
-                    String accountPassword = inputHandler.getStringInput("\nEnter your password: ");
+                case 1 -> accountService.createAccount(inputHandler, accounts);
 
-                    accountService.createAccount(accountNumber, accountPassword, accounts);
-
-                }
-
-                case 2 -> {
-
-                    if (!accounts.isEmpty()) {
-                        for (Account account : accounts) {
-                            System.out.println("Account " + account.getAccountNumber());
-                        }
-                        String accountNumber = inputHandler.getStringInput("\nEnter account number from the list: ");
-
-                        Account selectedAccount = accountService.selectAccount(accountNumber, accounts);
-
-                        if (selectedAccount != null) {
-
-                            accountService.manageAccount(inputHandler, selectedAccount);
-
-                        } else {
-                            System.out.println("Invalid selection");
-                        }
-
-                    } else {
-                        System.out.println("No accounts yet");
-                    }
-                }
+                case 2 -> accountService.selectAccount(inputHandler, accounts);
 
                 case 3 -> {
                     System.out.println("\nThank you for using the Banking System! Goodbye.");
@@ -62,6 +35,7 @@ public class BankingSystem {
                 }
 
                 default -> System.out.println("\nInvalid option. Please enter a number from 1 to 3.");
+
             }
 
         }

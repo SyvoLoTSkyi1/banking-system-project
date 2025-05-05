@@ -1,25 +1,38 @@
 package com.github.SyvoLoTSkyi1.bankingsystemproject;
 
 import java.util.List;
+import java.util.Map;
 
 public class AccountService {
 
-    public void createAccount(String accountNumber, String accountPassword, List<Account> accounts) {
+    public void createAccount(InputHandler inputHandler, Map<String, Account> accounts) {
+        String accountNumber = inputHandler.getStringInput("\nEnter your account number: ");
+        String accountPassword = inputHandler.getStringInput("\nEnter your password: ");
+
         Account newAccount = new Account(accountNumber, accountPassword);
         System.out.println("\nThe new account with account number " + newAccount.getAccountNumber() + " was created!");
-        accounts.add(newAccount);
+        accounts.put(accountNumber, newAccount);
     }
 
-    public Account selectAccount(String accountNumber, List<Account> accounts) {
+    public void selectAccount(InputHandler inputHandler, Map<String, Account> accounts) {
 
-        for (Account account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                return account;
+        if (!accounts.isEmpty()) {
+            accounts.keySet().forEach(accountNumber -> System.out.println("Account " + accountNumber));
+            String accountNumber = inputHandler.getStringInput("\nEnter account number from the list: ");
 
+            Account selectedAccount = accounts.get(accountNumber);
+
+            if (selectedAccount != null) {
+
+                manageAccount(inputHandler, selectedAccount);
+
+            } else {
+                System.out.println("Invalid selection");
             }
-        }
 
-        return null;
+        } else {
+            System.out.println("No accounts yet");
+        }
 
     }
 
