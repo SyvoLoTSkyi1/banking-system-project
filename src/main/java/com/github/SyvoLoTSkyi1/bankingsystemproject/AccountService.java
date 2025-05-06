@@ -56,13 +56,13 @@ public class AccountService {
                 case 2 -> getAccountBalance(selectedAccount);
 
                 case 3 -> {
-                    double depositAmount = inputHandler.getDoubleInput("\nEnter deposit amount: ");
-                    depositToAccount(selectedAccount, depositAmount);
+//                    double depositAmount = inputHandler.getDoubleInput("\nEnter deposit amount: ");
+                    depositToAccount(inputHandler, selectedAccount);
                 }
 
                 case 4 -> {
-                    double withdrawalAmount = inputHandler.getDoubleInput("\nEnter withdrawal amount: ");
-                    withdrawalFromAccount(selectedAccount, withdrawalAmount);
+//                    double withdrawalAmount = inputHandler.getDoubleInput("\nEnter withdrawal amount: ");
+                    withdrawalFromAccount(inputHandler, selectedAccount);
                 }
 
                 case 5 -> accountTransactionHistory(selectedAccount);
@@ -89,7 +89,8 @@ public class AccountService {
         System.out.println("\nAccount balance: " + account.getBalance());
     }
 
-    public void depositToAccount(Account account, double depositAmount) {
+    public void depositToAccount(InputHandler inputHandler, Account account) {
+        double depositAmount = inputHandler.getDoubleInput("\nEnter deposit amount: ");
         if (account.deposit(depositAmount)) {
             System.out.println("Deposit of " + depositAmount + " amount to account was made successfully");
         } else {
@@ -97,7 +98,8 @@ public class AccountService {
         }
     }
 
-    public void withdrawalFromAccount(Account account, double withdrawalAmount) {
+    public void withdrawalFromAccount(InputHandler inputHandler, Account account) {
+        double withdrawalAmount = inputHandler.getDoubleInput("\nEnter withdrawal amount: ");
         if (account.withdrawal(withdrawalAmount)) {
             System.out.println("Withdrawal of " + withdrawalAmount + " amount from account was made successfully");
         } else {
