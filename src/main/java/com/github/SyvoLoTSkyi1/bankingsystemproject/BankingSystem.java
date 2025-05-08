@@ -9,24 +9,25 @@ public class BankingSystem {
 
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
+        UserService userService = new UserService();
         AccountService accountService = new AccountService();
+        Map<String, User> users = new HashMap<>();
         Map<String, Account> accounts = new HashMap<>();
         
         System.out.println("Welcome to the Banking System!");
 
         while (true) {
-            System.out.println("\nMain Menu:");
-            System.out.println("1. Create a new account");
-            System.out.println("2. Select an existing account");
+            System.out.println("1. Log in");
+            System.out.println("2. Sign Up");
             System.out.println("3. Exit");
 
-            int option = inputHandler.getIntInput("\nChoose an option: ");
+            int choice = inputHandler.getIntInput("\nChoose an option: ");
 
-            switch (option) {
+            switch (choice) {
 
-                case 1 -> accountService.createAccount(inputHandler, accounts);
+                case 1 -> userService.signUpUser(inputHandler, users);
 
-                case 2 -> accountService.selectAccount(inputHandler, accounts);
+                case 2 -> userService.logInUser(inputHandler, accountService, users, accounts);
 
                 case 3 -> {
                     System.out.println("\nThank you for using the Banking System! Goodbye.");
