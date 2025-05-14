@@ -35,7 +35,7 @@ public class UserService {
 
                         case 1 -> accountService.createAccount(inputHandler, currentUser);
 
-                        case 2 -> accountService.selectAccount(inputHandler, currentUser.getAccounts());
+                        case 2 -> accountService.selectAccount(inputHandler, currentUser);
 
                         case 3 -> {
                             System.out.println("\nThank you for using the Banking System! Goodbye.");

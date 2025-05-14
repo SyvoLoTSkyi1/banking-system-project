@@ -14,13 +14,13 @@ public class AccountService {
         currentUser.addAccount(accountNumber, newAccount);
     }
 
-    public void selectAccount(InputHandler inputHandler, Map<String, Account> userAccounts) {
+    public void selectAccount(InputHandler inputHandler, User currentUser) {
 
-        if (!userAccounts.isEmpty()) {
-            userAccounts.keySet().forEach(accountNumber -> System.out.println("Account " + accountNumber));
+        if (!currentUser.getAccounts().isEmpty()) {
+            currentUser.getAccounts().keySet().forEach(accountNumber -> System.out.println("Account " + accountNumber));
             String accountNumber = inputHandler.getStringInput("\nEnter account number from the list: ");
 
-            Account selectedAccount = userAccounts.get(accountNumber);
+            Account selectedAccount = currentUser.getAccount(accountNumber);
 
             if (selectedAccount != null) {
 
