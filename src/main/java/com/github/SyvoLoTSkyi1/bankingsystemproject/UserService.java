@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 public class UserService {
-    AccountService accountService = new AccountService();
 
     public void signUpUser(InputHandler inputHandler, Map<String, User> users) {
         String username = inputHandler.getStringInput("\nEnter your username: ");
@@ -14,15 +13,15 @@ public class UserService {
         users.put(username, newUser);
     }
 
-    public void logInUser(InputHandler inputHandler, AccountService accountService, Map<String, User> users, Map<String, Account> accounts) {
+    public void logInUser(InputHandler inputHandler, AccountService accountService, Map<String, User> users) {
 
         if (!users.isEmpty()) {
 
             String username = inputHandler.getStringInput("\nEnter your username: ");
 
-            User selectedUser = users.get(username);
+            User currentUser = users.get(username);
 
-            if (selectedUser != null) {
+            if (currentUser != null) {
 
                 while (true) {
                     System.out.println("\nMain Menu:");
@@ -34,9 +33,9 @@ public class UserService {
 
                     switch (option) {
 
-                        case 1 -> accountService.createAccount(inputHandler, accounts);
+                        case 1 -> accountService.createAccount(inputHandler, currentUser);
 
-                        case 2 -> accountService.selectAccount(inputHandler, accounts);
+                        case 2 -> accountService.selectAccount(inputHandler, currentUser.getAccounts());
 
                         case 3 -> {
                             System.out.println("\nThank you for using the Banking System! Goodbye.");
