@@ -5,22 +5,22 @@ import java.util.Map;
 
 public class AccountService {
 
-    public void createAccount(InputHandler inputHandler, Map<String, Account> accounts) {
+    public void createAccount(InputHandler inputHandler, User currentUser) {
         String accountNumber = inputHandler.getStringInput("\nEnter your account number: ");
         String accountPassword = inputHandler.getStringInput("\nEnter your password: ");
 
         Account newAccount = new Account(accountNumber, accountPassword);
         System.out.println("\nThe new account with account number " + newAccount.getAccountNumber() + " was created!");
-        accounts.put(accountNumber, newAccount);
+        currentUser.addAccount(accountNumber, newAccount);
     }
 
-    public void selectAccount(InputHandler inputHandler, Map<String, Account> accounts) {
+    public void selectAccount(InputHandler inputHandler, Map<String, Account> userAccounts) {
 
-        if (!accounts.isEmpty()) {
-            accounts.keySet().forEach(accountNumber -> System.out.println("Account " + accountNumber));
+        if (!userAccounts.isEmpty()) {
+            userAccounts.keySet().forEach(accountNumber -> System.out.println("Account " + accountNumber));
             String accountNumber = inputHandler.getStringInput("\nEnter account number from the list: ");
 
-            Account selectedAccount = accounts.get(accountNumber);
+            Account selectedAccount = userAccounts.get(accountNumber);
 
             if (selectedAccount != null) {
 

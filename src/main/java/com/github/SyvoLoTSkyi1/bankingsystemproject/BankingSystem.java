@@ -27,7 +27,7 @@ public class BankingSystem {
 
                 case 1 -> userService.signUpUser(inputHandler, users);
 
-                case 2 -> userService.logInUser(inputHandler, accountService, users, accounts);
+                case 2 -> userService.logInUser(inputHandler, accountService, users);
 
                 case 3 -> {
                     System.out.println("\nThank you for using the Banking System! Goodbye.");
